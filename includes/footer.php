@@ -12,34 +12,46 @@
 
   
 
-$('#formsub').submit(function() {
+$('#formsub').submit(function(e) {
+  var xyz = e.preventDefault();
 
-    var username = document.getElementById('message').value;
-     $.jribbble.setToken('');
-    
-    
-    $.jribbble.users(username).shots({per_page: 1}).then(function(shots) {
+  var form = $(this);
+  function submitForm() {
+    form.submit();
+  }
+  function stopForm() {
+    form.unbind();
+  }
+  var username = document.getElementById('message').value;
+  $.jribbble.setToken('');
+
+
+  $.jribbble.users(username).shots({per_page: 1}).then(function(shots) {
     var html = [];
 
+    shots.forEach(function(shot) {
+      html.push('<li class="shot">');
+      html.push('<a id="link" href="' + shot.html_url + '" target="_blank">');
+      html.push('<img src="' + shot.images.normal + '">');
+      html.push('</a></li>');
+    });
+
+    $('.shot').html(html.join(''));
+    var href = $('#link').attr('href');
+    $('#brad').val(href);
+    $('.disable-on-click').css('display','none');
+    $('.enable-on-click').css('display','block');
+    form.unbind('submit');
   
-  shots.forEach(function(shot) {
-    html.push('<li class="shot">');
-    html.push('<a id="link" href="' + shot.html_url + '" target="_blank">'); 
-    html.push('<img src="' + shot.images.normal + '">');
-    html.push('</a></li>');
-  });
-  
-  $('.shot').html(html.join(''));
-  var href = $('#link').attr('href');
-    $('#brad').val() = href;
+    form.submit();
 
-    return true;
 
   });
-  });
+  //submit again here?
+});
 
 
-
+$('.enable-on-click').css('display','none');
 
 
  

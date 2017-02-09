@@ -50,11 +50,12 @@ if(isset($_POST['submit'])){
       <input name="number" type="tel" class="form-control" id="email" placeholder="Enter number">
     </div>
     <div class="form-group">
-     <input name="brad" placeholder="enter here" id="brad" cols="30" rows="10" >
+     <input type="hidden" name="brad" placeholder="enter here" id="brad" cols="30" rows="10" >
       <input name="message" placeholder="enter username you wish to follow" id="message" cols="30" rows="10" >
       
     </div>
-    <button name="submit" id="submit" type="submit" class="btn btn-primary btn-block" value="Send Message">Submit</button>
+    <button name="submit" id="submit" type="submit" class="btn btn-primary btn-block disable-on-click" value="Send Message">Get Latest Shot</button>
+    <button name="submit" id="submit" type="submit" class="btn btn-primary btn-block enable-on-click" value="Send Message">Send Latest Shot to Phone</button>
   </form>
 
 </div>
